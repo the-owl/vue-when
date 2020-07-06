@@ -1,0 +1,26 @@
+{
+  "name": "vue-when",
+  "version": "1.0.0",
+  "description": "Wait for condition to become true using Vue reactivity system",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --declaration",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "when",
+    "reactive",
+    "await"
+  ],
+  "author": "theowl",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.6",
+    "vue": "^2.6.11"
+  }
+}
