@@ -16,6 +16,7 @@
   ],
   "author": "theowl",
   "license": "MIT",
+  "repository": "github:the-owl/vue-when",
   "peerDependencies": {
     "vue": "^2.0.0"
   },
