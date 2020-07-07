@@ -11,14 +11,28 @@ const watcherVM = new Vue();
  * @param predicate
  */
 export default function when(predicate: () => any) {
-  return new Promise<void>(resolve => {
+  return new Promise<void>((resolve, reject) => {
     if (predicate()) {
       resolve();
       return;
     }
-    const unwatch = watcherVM.$watch(predicate, result => {
-      if (result) {
+
+    const wrappedPredicate = () => {
+      try {
+        return [null, predicate()];
+      } catch (error) {
+        return [error, null];
+      }
+    };
+
+    const unwatch = watcherVM.$watch(wrappedPredicate, ([error, result]) => {
+      if (error || result) {
         unwatch();
+      }
+
+      if (error) {
+        reject(error);
+      } else if (result) {
         resolve();
       }
     });
