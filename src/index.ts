@@ -1,8 +1,4 @@
-import Vue from 'vue';
-
-// used only for watchers here
-// vuex internally uses the same pattern with separate vue instance for its watchers
-const watcherVM = new Vue();
+import { watch } from 'vue';
 
 /**
  * Returns a promise that resolves when predicate value changes to true.
@@ -25,7 +21,7 @@ export default function when(predicate: () => any) {
       }
     };
 
-    const unwatch = watcherVM.$watch(wrappedPredicate, ([error, result]) => {
+    const unwatch = watch(wrappedPredicate, ([error, result]) => {
       if (error || result) {
         unwatch();
       }

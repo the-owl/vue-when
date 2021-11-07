@@ -1,8 +1,8 @@
 import when from './src';
-import Vue from 'vue';
+import { nextTick, reactive } from 'vue';
 
 test('basic functionality', async () => {
-  const data = Vue.observable({
+  const data = reactive({
     reachedEnd: false,
     stop: true,
   });
@@ -15,12 +15,12 @@ test('basic functionality', async () => {
   testFn();
   expect(data.reachedEnd).toBeFalsy();
   data.stop = false;
-  await Vue.nextTick();
+  await nextTick();
   expect(data.reachedEnd).toBeTruthy();
 });
 
 test('immediate resolve', async () => {
-  const data = Vue.observable({
+  const data = reactive({
     reachedEnd: false,
   });
 
@@ -30,7 +30,7 @@ test('immediate resolve', async () => {
   }
 
   testFn();
-  await Vue.nextTick();
+  await nextTick();
   expect(data.reachedEnd).toBeTruthy();
 });
 
@@ -43,7 +43,7 @@ test('immediate error propagation', () => {
 });
 
 test('watcher error propagation', () => {
-  const data = Vue.observable({
+  const data = reactive({
     flag: false,
   });
 
